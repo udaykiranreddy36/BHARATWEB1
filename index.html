@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Temperature Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    #container {
+      margin: 20px auto;
+      width: 300px;
+      text-align: left;
+      padding: 20px;
+      border: 2px solid #000000;
+      border-radius: 5px;
+      background-color: aliceblue;
+      color: rgb(9, 0, 0);
+    }
+    #container:hover{
+        box-shadow: 4px 6px 5px ;
+    }
+
+    .input-box {
+      width: 275px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: solid #270101;
+    }
+
+    .output-box {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #000000;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Temperature Converter</h1>
+    <div class="input-container">
+      <input type="number" class="input-box" id="kelvinInput" placeholder="Enter temperature in Kelvin (K)">
+      <input type="number" class="input-box" id="fahrenheitInput" placeholder="Enter temperature in Fahrenheit (°F)">
+      <input type="number" class="input-box" id="celsiusInput" placeholder="Enter temperature in Celsius (°C)">
+    </div>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    var kelvinInput = document.getElementById("kelvinInput");
+    var fahrenheitInput = document.getElementById("fahrenheitInput");
+    var celsiusInput = document.getElementById("celsiusInput");
+    
+    kelvinInput.addEventListener("input", function() {
+      var kelvin = parseFloat(kelvinInput.value);
+      if (!isNaN(kelvin)) {
+        var fahrenheit = (kelvin - 273.15) * 9/5 + 32;
+        var celsius = kelvin - 273.15;
+        fahrenheitInput.value = fahrenheit.toFixed(2);
+        celsiusInput.value = celsius.toFixed(2);
+      } else {
+        fahrenheitInput.value = "";
+        celsiusInput.value = "";
+      }
+    });
+
+    fahrenheitInput.addEventListener("input", function() {
+      var fahrenheit = parseFloat(fahrenheitInput.value);
+      if (!isNaN(fahrenheit)) {
+        var kelvin = (fahrenheit - 32) * 5/9 + 273.15;
+        var celsius = (fahrenheit - 32) * 5/9;
+        kelvinInput.value = kelvin.toFixed(2);
+        celsiusInput.value = celsius.toFixed(2);
+      } else {
+        kelvinInput.value = "";
+        celsiusInput.value = "";
+      }
+    });
+
+    celsiusInput.addEventListener("input", function() {
+      var celsius = parseFloat(celsiusInput.value);
+      if (!isNaN(celsius)) {
+        var kelvin = celsius + 273.15;
+        var fahrenheit = (celsius * 9/5) + 32;
+        kelvinInput.value = kelvin.toFixed(2);
+        fahrenheitInput.value = fahrenheit.toFixed(2);
+      } else {
+        kelvinInput.value = "";
+        fahrenheitInput.value = "";
+      }
+    });
+  </script>
+</body>
+</html>
